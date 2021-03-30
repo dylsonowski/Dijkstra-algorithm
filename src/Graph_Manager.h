@@ -1,9 +1,11 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include <map>
 #include <vector>
 #include <utility>
 #include <optional>
+#include <sstream>
 
 class Graph_Manager {
 
@@ -19,9 +21,30 @@ public:
 
 	inline std::vector<std::pair<std::string, int>> GetCity(std::string name) const { return _graph.at(name); }
 	inline std::pair<int, std::vector<std::pair<std::string, int>>> GetFinalResult() const { return std::make_pair(_pathCost, _shortestPath); }
+	std::string ToString() const {
+		std::stringstream ss;
+		unsigned int counter = 0;
+		for (const auto& it : _graph) {
+			counter++;
+			ss << counter << ") " << it.first << "\n";
+			for (const auto& vecIt : it.second) {
+				ss << " -> (" << vecIt.first << ", " << vecIt.second << ");\n";
+			}
+			ss << "\n\n";
+		}
+		return ss.str();
+	}
 
 private:
 	std::map<std::string, std::vector<std::pair<std::string, int>>> _graph;
 	int _pathCost;
 	std::vector<std::pair<std::string, int>> _shortestPath;
+	std::vector<Path_Data_Array> _fullPathTable;
+};
+
+inline std::ostream& operator<<(std::ostream& os, const Graph_Manager& data) { return os << data.ToString(); }
+
+struct Path_Data_Array {
+	std::string _node, _transitionalNode;
+	int _cost;
 };

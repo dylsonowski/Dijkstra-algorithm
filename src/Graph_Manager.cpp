@@ -1,6 +1,6 @@
 ﻿#include "Graph_Manager.h"
 
-Graph_Manager::Graph_Manager() {
+Graph_Manager::Graph_Manager() : _pathCost(0) {
 	std::vector<std::pair<std::string, int>> connections = { std::make_pair("Katowice", 2), std::make_pair("Kielce", 3), std::make_pair("Rzeszów", 5) };
 	_graph.insert({ "Kraków", connections});
 
@@ -68,4 +68,29 @@ Graph_Manager::Graph_Manager() {
 	connections.clear();
 	connections = { std::make_pair("Koszalin", 7), std::make_pair("Bydgoszcz", 8), std::make_pair("Warszawa", 14), std::make_pair("Olsztyn", 5) };
 	_graph.insert({ "Gdańsk", connections });
+}
+
+void Graph_Manager::AddNode(std::string name, std::vector<std::pair<std::string, int>> connections) {
+	bool correctConnections = true;
+	for (const auto& it : connections) {
+		if (_graph.find(it.first) == _graph.end())
+			correctConnections = false;
+	}
+
+	if (_graph.find(name) != _graph.end()) {
+		std::cout << "This node already exist!!\n";
+		system("pause");
+		system("clear");
+	}
+	else if (correctConnections)
+		_graph.insert({ name, connections });
+	else {
+		std::cout << "Not existing connection!!\n";
+		system("pause");
+		system("clear");
+	}
+}
+
+void Graph_Manager::DijkstraAlgorithm(std::optional<std::string> startPoint) {
+	_graph.find(startPoint.value_or(_graph.begin()->first));
 }
