@@ -1,73 +1,74 @@
-Ôªø#include "Graph_Manager.h"
+#include <algorithm>
+#include "Graph_Manager.h"
 
 Graph_Manager::Graph_Manager() : _pathCost(0) {
-	std::vector<std::pair<std::string, int>> connections = { std::make_pair("Katowice", 2), std::make_pair("Kielce", 3), std::make_pair("Rzesz√≥w", 5) };
-	_graph.insert({ "Krak√≥w", connections});
+	std::vector<std::pair<std::string, int>> connections = { std::make_pair("Katowice", 2), std::make_pair("Kielce", 3), std::make_pair("RzeszÛw", 5) };
+	_graph.insert({ "KrakÛw", connections});
 
 	connections.clear();
-	connections = { std::make_pair("Krak√≥w", 5), std::make_pair("Lublin", 4) };
-	_graph.insert({ "Rzesz√≥w", connections });
+	connections = { std::make_pair("KrakÛw", 5), std::make_pair("Lublin", 4) };
+	_graph.insert({ "RzeszÛw", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Rzesz√≥w", 4), std::make_pair("Kielce", 6), std::make_pair("Warszawa", 6) };
+	connections = { std::make_pair("RzeszÛw", 4), std::make_pair("Kielce", 6), std::make_pair("Warszawa", 6) };
 	_graph.insert({ "Lublin", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Lublin", 6), std::make_pair("Krak√≥w", 3), std::make_pair("Warszawa", 6), std::make_pair("Katowice", 4) };
+	connections = { std::make_pair("Lublin", 6), std::make_pair("KrakÛw", 3), std::make_pair("Warszawa", 6), std::make_pair("Katowice", 4) };
 	_graph.insert({ "Kielce", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Kielce", 4), std::make_pair("Krak√≥w", 2), std::make_pair("≈Å√≥d≈∫", 7) };
+	connections = { std::make_pair("Kielce", 4), std::make_pair("KrakÛw", 2), std::make_pair("£Ûdº", 7) };
 	_graph.insert({ "Katowice", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Wroc≈Çaw", 2), std::make_pair("≈Å√≥d≈∫", 7) };
+	connections = { std::make_pair("Wroc≥aw", 2), std::make_pair("£Ûdº", 7) };
 	_graph.insert({ "Opole", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Opole", 7), std::make_pair("Katowice", 7), std::make_pair("Warszawa", 6), std::make_pair("Bydgoszcz", 8), std::make_pair("Pozna≈Ñ", 8) };
-	_graph.insert({ "≈Å√≥d≈∫", connections });
+	connections = { std::make_pair("Opole", 7), std::make_pair("Katowice", 7), std::make_pair("Warszawa", 6), std::make_pair("Bydgoszcz", 8), std::make_pair("PoznaÒ", 8) };
+	_graph.insert({ "£Ûdº", connections });
 
 	connections.clear();
-	connections = { std::make_pair("≈Å√≥d≈∫", 6), std::make_pair("Kielce", 6), std::make_pair("Lublin", 6), std::make_pair("Bia≈Çystok", 10), std::make_pair("Gda≈Ñsk", 14), 
+	connections = { std::make_pair("£Ûdº", 6), std::make_pair("Kielce", 6), std::make_pair("Lublin", 6), std::make_pair("Bia≥ystok", 10), std::make_pair("GdaÒsk", 14), 
 		std::make_pair("Bydgoszcz", 11) };
 	_graph.insert({ "Warszawa", connections });
 
 	connections.clear();
 	connections = { std::make_pair("Warszawa", 10), std::make_pair("Olsztyn", 11) };
-	_graph.insert({ "Bia≈Çystok", connections });
+	_graph.insert({ "Bia≥ystok", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Bia≈Çystok", 11), std::make_pair("Gda≈Ñsk", 5) };
+	connections = { std::make_pair("Bia≥ystok", 11), std::make_pair("GdaÒsk", 5) };
 	_graph.insert({ "Olsztyn", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Warszawa", 11), std::make_pair("≈Å√≥d≈∫", 8), std::make_pair("Pozna≈Ñ", 4), std::make_pair("Gda≈Ñsk", 8) };
+	connections = { std::make_pair("Warszawa", 11), std::make_pair("£Ûdº", 8), std::make_pair("PoznaÒ", 4), std::make_pair("GdaÒsk", 8) };
 	_graph.insert({ "Bydgoszcz", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Bydgoszcz", 4), std::make_pair("≈Å√≥d≈∫", 8), std::make_pair("Wroc≈Çaw", 7), std::make_pair("Zielona G√≥ra", 4), std::make_pair("Koszalin", 8) };
-	_graph.insert({ "Pozna≈Ñ", connections });
+	connections = { std::make_pair("Bydgoszcz", 4), std::make_pair("£Ûdº", 8), std::make_pair("Wroc≥aw", 7), std::make_pair("Zielona GÛra", 4), std::make_pair("Koszalin", 8) };
+	_graph.insert({ "PoznaÒ", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Opole", 2), std::make_pair("Pozna≈Ñ", 7) };
-	_graph.insert({ "Wroc≈Çaw", connections });
+	connections = { std::make_pair("Opole", 2), std::make_pair("PoznaÒ", 7) };
+	_graph.insert({ "Wroc≥aw", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Szczecin", 8), std::make_pair("Pozna≈Ñ", 4) };
-	_graph.insert({ "Zielona G√≥ra", connections });
+	connections = { std::make_pair("Szczecin", 8), std::make_pair("PoznaÒ", 4) };
+	_graph.insert({ "Zielona GÛra", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Zielona G√≥ra", 8), std::make_pair("Koszalin", 7) };
+	connections = { std::make_pair("Zielona GÛra", 8), std::make_pair("Koszalin", 7) };
 	_graph.insert({ "Szczecin", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Szczecin", 7), std::make_pair("Pozna≈Ñ", 8), std::make_pair("Gda≈Ñsk", 7) };
+	connections = { std::make_pair("Szczecin", 7), std::make_pair("PoznaÒ", 8), std::make_pair("GdaÒsk", 7) };
 	_graph.insert({ "Koszalin", connections });
 
 	connections.clear();
 	connections = { std::make_pair("Koszalin", 7), std::make_pair("Bydgoszcz", 8), std::make_pair("Warszawa", 14), std::make_pair("Olsztyn", 5) };
-	_graph.insert({ "Gda≈Ñsk", connections });
+	_graph.insert({ "GdaÒsk", connections });
 }
 
 void Graph_Manager::AddNode(std::string name, std::vector<std::pair<std::string, int>> connections) {
@@ -80,17 +81,43 @@ void Graph_Manager::AddNode(std::string name, std::vector<std::pair<std::string,
 	if (_graph.find(name) != _graph.end()) {
 		std::cout << "This node already exist!!\n";
 		system("pause");
-		system("clear");
 	}
 	else if (correctConnections)
 		_graph.insert({ name, connections });
 	else {
 		std::cout << "Not existing connection!!\n";
 		system("pause");
-		system("clear");
 	}
 }
 
 void Graph_Manager::DijkstraAlgorithm(std::optional<std::string> startPoint) {
-	_graph.find(startPoint.value_or(_graph.begin()->first));
+	if (_graph.find(startPoint.value_or(_graph.begin()->first)) != _graph.end()) {
+		std::vector<std::string> visitedNodes;
+		for (const auto& it : _graph) {
+			if (it.first == startPoint.value_or(_graph.begin()->first))
+				_fullPathTable.emplace_back(Path_Data_Array(it.first, 0));
+			else
+				_fullPathTable.emplace_back(Path_Data_Array(it.first));
+		}
+	
+		//std::map<std::string, std::vector<std::pair<std::string, int>>>::iterator examinatedNode;
+		while (visitedNodes.size() != _graph.size()) {
+			auto examinatedNode = std::min_element(_fullPathTable.begin(), _fullPathTable.end(), [&](Path_Data_Array row1, Path_Data_Array row2) {
+				return row1._cost < row2._cost && std::find(visitedNodes.begin(), visitedNodes.end(), row1._node) == visitedNodes.end() &&
+					std::find(visitedNodes.begin(), visitedNodes.end(), row2._node) == visitedNodes.end(); });
+			//auto examinatedNode = _graph.at(examinatedNodeName);
+			for (const auto& it : _graph.at(examinatedNode->_node)) {
+				auto secondNode = std::find_if(_fullPathTable.begin(), _fullPathTable.end(), [&](Path_Data_Array row) {return row._node == it.first; });
+				if (examinatedNode->_cost + it.second < secondNode->_cost) {
+					secondNode->_cost = examinatedNode->_cost + it.second;
+					secondNode->_transitionalNode = examinatedNode->_node;
+				}
+			}
+			visitedNodes.push_back(examinatedNode->_node);
+		}
+	}
+	else {
+		std::cout << "Incorrect starting point!!\n";
+		system("pause");
+	}
 }
