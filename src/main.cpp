@@ -1,8 +1,8 @@
-//#include <locale.h>
+#include <locale.h>
 #include "Graph_Manager.h"
 
 int main(int argc, char** argv) {
-	//setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 	std::string startPoint, endPoint;
 	if (argc > 1) {
 		for (int it = 0; it < argc; it++) {
@@ -15,10 +15,17 @@ int main(int argc, char** argv) {
 	}
 
 	Graph_Manager graph;
-	graph.DijkstraAlgorithm("Katowice");
+	graph.DijkstraAlgorithm("Warszawa", "Rzeszów");
 	std::vector<Path_Data_Array> result = graph.GetFullPathTable();
-	graph.AddNode("£ód¼", std::vector<std::pair<std::string, int>>({ std::make_pair("Kraków", 4) }));
-	std::cout << graph;
+	std::pair<int, std::vector<std::pair<std::string, int>>> result2 = graph.GetFinalResult();
+	//graph.AddNode("£ódŸ", std::vector<std::pair<std::string, int>>({ std::make_pair("Kraków", 4) }));
+	//std::cout << graph;
+	for (int it = result2.second.size() - 1; it >= 0; it--) {
+		if(it == 0)
+			std::cout << "(" << result2.second.at(it).first << ", " << result2.second.at(it).second << ") Cost: " << result2.first << "\n";
+		else
+			std::cout << "(" << result2.second.at(it).first << ", " << result2.second.at(it).second << ") -> ";
+	}
 	system("pause");
 	return 0;
 }

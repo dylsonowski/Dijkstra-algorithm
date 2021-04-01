@@ -18,19 +18,19 @@ Graph_Manager::Graph_Manager() : _pathCost(0) {
 	_graph.insert({ "Kielce", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Kielce", 4), std::make_pair("Kraków", 2), std::make_pair("£ód¼", 7) };
+	connections = { std::make_pair("Kielce", 4), std::make_pair("Kraków", 2), std::make_pair("£ódŸ", 7) };
 	_graph.insert({ "Katowice", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Wroc³aw", 2), std::make_pair("£ód¼", 7) };
+	connections = { std::make_pair("Wroc³aw", 2), std::make_pair("£ódŸ", 7) };
 	_graph.insert({ "Opole", connections });
 
 	connections.clear();
 	connections = { std::make_pair("Opole", 7), std::make_pair("Katowice", 7), std::make_pair("Warszawa", 6), std::make_pair("Bydgoszcz", 8), std::make_pair("Poznañ", 8) };
-	_graph.insert({ "£ód¼", connections });
+	_graph.insert({ "£ódŸ", connections });
 
 	connections.clear();
-	connections = { std::make_pair("£ód¼", 6), std::make_pair("Kielce", 6), std::make_pair("Lublin", 6), std::make_pair("Bia³ystok", 10), std::make_pair("Gdañsk", 14), 
+	connections = { std::make_pair("£ódŸ", 6), std::make_pair("Kielce", 6), std::make_pair("Lublin", 6), std::make_pair("Bia³ystok", 10), std::make_pair("Gdañsk", 14), 
 		std::make_pair("Bydgoszcz", 11) };
 	_graph.insert({ "Warszawa", connections });
 
@@ -43,11 +43,11 @@ Graph_Manager::Graph_Manager() : _pathCost(0) {
 	_graph.insert({ "Olsztyn", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Warszawa", 11), std::make_pair("£ód¼", 8), std::make_pair("Poznañ", 4), std::make_pair("Gdañsk", 8) };
+	connections = { std::make_pair("Warszawa", 11), std::make_pair("£ódŸ", 8), std::make_pair("Poznañ", 4), std::make_pair("Gdañsk", 8) };
 	_graph.insert({ "Bydgoszcz", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Bydgoszcz", 4), std::make_pair("£ód¼", 8), std::make_pair("Wroc³aw", 7), std::make_pair("Zielona Góra", 4), std::make_pair("Koszalin", 8) };
+	connections = { std::make_pair("Bydgoszcz", 4), std::make_pair("£ódŸ", 8), std::make_pair("Wroc³aw", 7), std::make_pair("Zielona Góra", 4), std::make_pair("Koszalin", 8) };
 	_graph.insert({ "Poznañ", connections });
 
 	connections.clear();
@@ -101,7 +101,7 @@ void Graph_Manager::DijkstraAlgorithm(std::optional<std::string> startPoint) {
 		}
 	
 		//std::map<std::string, std::vector<std::pair<std::string, int>>>::iterator examinatedNode;
-		while (visitedNodes.size() != _graph.size()) {
+		do {
 			auto examinatedNode = std::min_element(_fullPathTable.begin(), _fullPathTable.end(), [&](Path_Data_Array row1, Path_Data_Array row2) {
 				return row1._cost < row2._cost && std::find(visitedNodes.begin(), visitedNodes.end(), row1._node) == visitedNodes.end() &&
 					std::find(visitedNodes.begin(), visitedNodes.end(), row2._node) == visitedNodes.end(); });
@@ -114,10 +114,30 @@ void Graph_Manager::DijkstraAlgorithm(std::optional<std::string> startPoint) {
 				}
 			}
 			visitedNodes.push_back(examinatedNode->_node);
-		}
+		} while (visitedNodes.size() <= _graph.size());
 	}
 	else {
 		std::cout << "Incorrect starting point!!\n";
 		system("pause");
 	}
+}
+
+void Graph_Manager::DijkstraAlgorithm(std::optional<std::string> startPoint, std::optional<std::string> endPoint) {
+	DijkstraAlgorithm(startPoint.value_or(_graph.begin()->first));
+	auto endNode = std::find_if(_fullPathTable.begin(), _fullPathTable.end(), [&](Path_Data_Array row) {return row._node == endPoint.value_or(_graph.begin()->first); });
+	auto transitionNode = _graph.at(endNode->_transitionalNode);
+	/*_shortestPath.push_back(std::make_pair(endNode->_node, std::find_if(transitionNode.begin(), transitionNode.end(), [&](std::pair<std::string, int> row) {
+		return row.first == endNode->_node; })->second));*/
+	_pathCost = endNode->_cost;
+
+	do {
+		std::string prewIterationNode = endNode->_node;
+		endNode = std::find_if(_fullPathTable.begin(), _fullPathTable.end(), [&](Path_Data_Array row) { return row._node == endNode->_transitionalNode; });
+		transitionNode = _graph.at(endNode->_node);
+		_shortestPath.push_back(std::make_pair(prewIterationNode, std::find_if(transitionNode.begin(), transitionNode.end(), [&](std::pair<std::string, int> row) {
+			return row.first == prewIterationNode; })->second));
+	} while (endNode->_node != startPoint.value_or(_graph.begin()->first));
+
+	_shortestPath.push_back(std::make_pair(startPoint.value_or(_graph.begin()->first), std::find_if(_fullPathTable.begin(), _fullPathTable.end(), [&](Path_Data_Array row) {
+		return row._node == startPoint.value_or(_graph.begin()->first); })->_cost));
 }
