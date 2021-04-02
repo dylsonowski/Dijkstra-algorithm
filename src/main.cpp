@@ -15,10 +15,9 @@ int main(int argc, char** argv) {
 	}
 
 	Graph_Manager graph;
-	graph.DijkstraAlgorithm("Warszawa", "Rzeszów");
+	graph.DijkstraAlgorithm(startPoint, endPoint);
 	std::vector<Path_Data_Array> result = graph.GetFullPathTable();
 	std::pair<int, std::vector<std::pair<std::string, int>>> result2 = graph.GetFinalResult();
-	//graph.AddNode("£ódŸ", std::vector<std::pair<std::string, int>>({ std::make_pair("Kraków", 4) }));
 	//std::cout << graph;
 	for (int it = result2.second.size() - 1; it >= 0; it--) {
 		if(it == 0)

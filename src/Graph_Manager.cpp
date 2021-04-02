@@ -18,19 +18,19 @@ Graph_Manager::Graph_Manager() : _pathCost(0) {
 	_graph.insert({ "Kielce", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Kielce", 4), std::make_pair("Kraków", 2), std::make_pair("£ódŸ", 7) };
+	connections = { std::make_pair("Kielce", 4), std::make_pair("Kraków", 2), std::make_pair("£ód¼", 7) };
 	_graph.insert({ "Katowice", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Wroc³aw", 2), std::make_pair("£ódŸ", 7) };
+	connections = { std::make_pair("Wroc³aw", 2), std::make_pair("£ód¼", 7) };
 	_graph.insert({ "Opole", connections });
 
 	connections.clear();
 	connections = { std::make_pair("Opole", 7), std::make_pair("Katowice", 7), std::make_pair("Warszawa", 6), std::make_pair("Bydgoszcz", 8), std::make_pair("Poznañ", 8) };
-	_graph.insert({ "£ódŸ", connections });
+	_graph.insert({ "£ód¼", connections });
 
 	connections.clear();
-	connections = { std::make_pair("£ódŸ", 6), std::make_pair("Kielce", 6), std::make_pair("Lublin", 6), std::make_pair("Bia³ystok", 10), std::make_pair("Gdañsk", 14), 
+	connections = { std::make_pair("£ód¼", 6), std::make_pair("Kielce", 6), std::make_pair("Lublin", 6), std::make_pair("Bia³ystok", 10), std::make_pair("Gdañsk", 14), 
 		std::make_pair("Bydgoszcz", 11) };
 	_graph.insert({ "Warszawa", connections });
 
@@ -43,11 +43,11 @@ Graph_Manager::Graph_Manager() : _pathCost(0) {
 	_graph.insert({ "Olsztyn", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Warszawa", 11), std::make_pair("£ódŸ", 8), std::make_pair("Poznañ", 4), std::make_pair("Gdañsk", 8) };
+	connections = { std::make_pair("Warszawa", 11), std::make_pair("£ód¼", 8), std::make_pair("Poznañ", 4), std::make_pair("Gdañsk", 8) };
 	_graph.insert({ "Bydgoszcz", connections });
 
 	connections.clear();
-	connections = { std::make_pair("Bydgoszcz", 4), std::make_pair("£ódŸ", 8), std::make_pair("Wroc³aw", 7), std::make_pair("Zielona Góra", 4), std::make_pair("Koszalin", 8) };
+	connections = { std::make_pair("Bydgoszcz", 4), std::make_pair("£ód¼", 8), std::make_pair("Wroc³aw", 7), std::make_pair("Zielona Góra", 4), std::make_pair("Koszalin", 8) };
 	_graph.insert({ "Poznañ", connections });
 
 	connections.clear();

@@ -1,3 +1,5 @@
-﻿  main.cpp
-C:\Users\mdyla\source\repos\Dijkstra-algorithm\src\main.cpp(23,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Dijkstra_Algorithm.vcxproj -> C:\Users\mdyla\Source\Repos\Dijkstra-algorithm\bin\Dijkstra_Algorithm_x64\Debug\Dijkstra_Algorithm.exe
+﻿  Graph_Manager.cpp
+  main.cpp
+D:\Visual Studio\Dijkstra_Algorithm\src\main.cpp(22,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  Dijkstra_Algorithm.vcxproj -> D:\Visual Studio\Dijkstra_Algorithm\bin\Dijkstra_Algorithm_x64\Debug\Dijkstra_Algorithm.exe

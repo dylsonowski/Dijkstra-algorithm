@@ -1,0 +1,8 @@
+﻿  Graph_Manager.cpp
+  main.cpp
+D:\Visual Studio\Dijkstra_Algorithm\src\main.cpp(22,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 567 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Dijkstra_Algorithm.vcxproj -> D:\Visual Studio\Dijkstra_Algorithm\bin\Dijkstra_Algorithm_x64\Release\Dijkstra_Algorithm.exe
